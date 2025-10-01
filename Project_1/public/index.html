@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="ExTracker">
+        <div class="card_header">
+            <div class="title">
+                <h1>Expense Tracker</h1>
+                <p>Track your expenses</p>
+            </div>
+            
+            <button class="btn" id="addBtn">+ Add Expense</button>
+
+        </div>
+        <div class="card_body">
+            <div class="search-row">
+                <input class="search" id="search" placeholder="Search expenses..."/>
+            </div>
+
+            <div class="empty" id="emptyState">
+                No expenses yet. Add your first expense to get started.
+            </div>
+
+        <ul class="list" id="expenseList" hidden></ul>
+        </div>
+    </div>
+    <div class="cardFooter">
+        <div>Total Expenses</div>
+        <div class="total" id="totalAmount">$0.00</div>
+    </div>
+
+
+    <div class="main_part">
+        <form id="expenseForm" class="form">
+            <div class="main_form">
+                <div class="field">
+                    <label for="date">Date</label>
+                    <input id="date" name="date" type="date" />
+                </div>
+
+                <div class="field">
+                    <label for="amount">Amount</label>
+                    <input id="amount" name="amount" type="number" step="0.01" placeholder="0.00" />
+                </div>
+
+                <div class="field">
+                    <label for="category">Category</label>
+                    <select id="category" name="category">
+                    <option value="">Select a category</option>
+                    <option>Food</option>
+                    <option>Transportation</option>
+                    <option>Housing</option>
+                    <option>Entertainment</option>
+                    <option>Utilities</option>
+                    <option>Healthcare</option>
+                    <option>Shopping</option>
+                    <option>Other</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="desc">Description</label>
+                    <input id="desc" name="description" type="text" placeholder="Lunch, groceries, etc." />
+                </div>
+                </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn-muted" id="formCancel">Cancel</button>
+                <button type="submit" class="btn">Save Expense</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
