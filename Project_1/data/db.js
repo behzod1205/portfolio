@@ -7,12 +7,7 @@ async function readDB() {
         const data = await fs.readFile(dbPath, "utf-8")
         return JSON.parse(data)
     } catch (error) {
-        if (error.code === "ENOENT") {
-            await fs.writeFile(dbPath, JSON.stringify([]))
-            return []
-        } else {
-            throw error
-        }
+        throw error
     }
 }
 
