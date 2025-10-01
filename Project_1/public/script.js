@@ -13,14 +13,14 @@ const emptyState = document.getElementById('emptyState')
 const totalAmount = document.getElementById('totalAmount')
 const searchInput = document.getElementById('search')
 
-const url = "http://localhost:3636/expenses"
+const url = "http://localhost:3535/expenses"
 
 function updateTotal(expenses){
     const total = expenses.reduce((sum, e)=> sum + Number(e.amount), 0)
     totalAmount.textContent = `$${total.toFixed(2)}`
 }
 
-function renderExpenses(){
+function renderExpenses(expenses){
     expenseList.innerHTML = ""
 
     if(expenses.length === 0){
@@ -42,7 +42,7 @@ function renderExpenses(){
                 <small>${expense.date}</small>
             </div>
             <div>
-                $${Number(e.amount).toFixed(2)}
+                $${Number(expense.amount).toFixed(2)}
                 <button class="delBtn">Delete</button>
             </div>
             `;
@@ -82,7 +82,7 @@ expenseForm.addEventListener("submit", async (e) => {
 
     if (!expense.date || !expense.amount || !expense.category) return
 
-    await fetch(API_URL, {
+    await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(expense),
@@ -91,6 +91,17 @@ expenseForm.addEventListener("submit", async (e) => {
     loadExpenses()
     closeForm()
 })
+
+searchInput.addEventListener("input", async () => {
+    const res = await fetch(url)
+    const data = await res.json()
+    const filtered = data.filter(e => 
+        e.description.toLowerCase().includes(searchInput.value.toLowerCase()) ||
+        e.category.toLowerCase().includes(searchInput.value.toLowerCase())
+    )
+    renderExpenses(filtered)
+})
+
 
 async function loadExpenses() {
     const res = await fetch(url)
